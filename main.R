@@ -5,7 +5,7 @@ library(wordcloud)
 library(vosonSML)
 
 # Load in data (rt data frame)
-githubURL <- "https://github.com/GabriellaSpence/Network-Analysis/raw/main/Data.RData"
+githubURL = "https://github.com/GabriellaSpence/Network-Analysis/raw/main/Data.RData"
 load(url(githubURL))
 
 # Convert class to work with vosonSML package
