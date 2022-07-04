@@ -8,7 +8,7 @@ library(vosonSML)
 githubURL = "https://github.com/GabriellaSpence/Network-Analysis/raw/main/Data.RData"
 load(url(githubURL))
 
-# Convert class to work with vosonSML package
+# Convert to work with vosonSML package
 class(rt) = append(c("datasource", "twitter"), class(rt))
 rt = rt %>% ImportData("twitter")
 
