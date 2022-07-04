@@ -65,11 +65,22 @@ words %>%
   with(wordcloud(word, n, random.order = FALSE, max.words = 100, colors = "#F29545"))
 
 
-# Activity network
+########### Build network data frames [In Progress] ####################
+
+# Activity network: Nodes are tweets, edges are the relationship to other tweets (replying, retweeting, or quoting tweets)
 activity = rt
 activity = activity %>% select(ends_with("status_id"), ends_with("user_id"), 
                                ends_with("screen_name"), starts_with("is_"), 
                                ends_with("created_at"))
 
 
+# Actor network: Nodes are users, edges are the relationship to other users
+actor = rt
+actor = actor %>% select(.data$status_id, .data$screen_name, starts_with("is_"), ends_with("user_id"),
+                         ends_with("screen_name"), starts_with("reply_"), ends_with("created_at"),
+                         starts_with("mentions"))
+
+
+# Semantic network: Nodes are concepts, edges are words or hashtags
+semantic = rt
 
