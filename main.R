@@ -3,13 +3,12 @@ library(tidytext)
 library(stringr)
 library(wordcloud)
 library(vosonSML)
+library(magrittr)
 
 # Load in data (rt data frame)
-githubURL = "https://github.com/GabriellaSpence/Network-Analysis/raw/main/Data.RData"
-load(url(githubURL))
+rt = readRDS("Data.rds")
 
 # Convert to work with vosonSML package
-class(rt) = append(c("datasource", "twitter"), class(rt))
 rt = rt %>% ImportData("twitter")
 
 # Data Exploration: View (English) tweets over time

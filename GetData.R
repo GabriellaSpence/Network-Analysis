@@ -13,4 +13,4 @@ rt <- search_tweets("#peopleanalytics", n = 500, include_rts = TRUE, lang = "en"
 View(rt)
 
 #Save data for later
-save(rt, file = "Data.RData")
+saveRDS(rt, "Data.rds")
