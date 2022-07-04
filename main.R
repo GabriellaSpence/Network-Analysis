@@ -2,9 +2,15 @@ library(dplyr)
 library(tidytext)
 library(stringr)
 library(wordcloud)
+library(vosonSML)
 
 # Load in data (rt data frame)
-load("Data.RData")
+githubURL <- "https://github.com/GabriellaSpence/Network-Analysis/raw/main/Data.RData"
+load(url(githubURL))
+
+# Convert class to work with vosonSML package
+class(rt) = append(c("datasource", "twitter"), class(rt))
+rt = rt %>% ImportData("twitter")
 
 # Data Exploration: View (English) tweets over time
 ts_plot(rt, "hours") +
@@ -69,16 +75,10 @@ words %>%
 
 # Activity network: Nodes are tweets, edges are the relationship to other tweets (replying, retweeting, or quoting tweets)
 activity = rt
-activity = activity %>% select(ends_with("status_id"), ends_with("user_id"), 
-                               ends_with("screen_name"), starts_with("is_"), 
-                               ends_with("created_at"))
 
 
 # Actor network: Nodes are users, edges are the relationship to other users
 actor = rt
-actor = actor %>% select(.data$status_id, .data$screen_name, starts_with("is_"), ends_with("user_id"),
-                         ends_with("screen_name"), starts_with("reply_"), ends_with("created_at"),
-                         starts_with("mentions"))
 
 
 # Semantic network: Nodes are concepts, edges are words or hashtags
